@@ -1,0 +1,26 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+#body{
+    height: 100vh;
+}
+
+.hea{
+    padding: 10px;
+    border: 1px solid pink;
+    background-color: azure;
+}
+
+
+#nav{
+    height: 100vh;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 10px;
+    border: 1px solid pink;
+    padding-top: 100px;
+}
