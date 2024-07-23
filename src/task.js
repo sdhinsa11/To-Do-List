@@ -47,6 +47,7 @@ var tks = (function(){
     return{
         addToTasks: addToTasks,
         deleteTasks: deleteTasks,
+        getTasks: getTasks,
     };
 
 })();
