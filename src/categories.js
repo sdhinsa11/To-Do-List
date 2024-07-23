@@ -25,10 +25,15 @@ var projects = (function(){
         allProjects.splice(index, 1);
     }
 
+    function getProjects(){
+        return allProjects;
+    }
+
 
     return{
         addToProj: addToProj,
         deleteProj: deleteProj,
+        allProjects:allProjects,
     };
 
 })();
