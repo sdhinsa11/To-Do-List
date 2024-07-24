@@ -43,7 +43,6 @@ var tks = (function(){
         return allTasks
     }
 
-
     return{
         addToTasks: addToTasks,
         deleteTasks: deleteTasks,
@@ -51,3 +50,5 @@ var tks = (function(){
     };
 
 })();
+
+export default tks;

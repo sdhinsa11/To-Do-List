@@ -15,7 +15,7 @@
 
 
 #nav{
-    height: 100vh;
+    height: 70vh;
     width: 80px;
     display: flex;
     flex-direction: column;
@@ -23,4 +23,20 @@
     padding: 10px;
     border: 1px solid pink;
     padding-top: 100px;
+}
+
+
+.main{
+    display: flex;
+    height:100%;
+}
+
+.toDos{
+    height: 99vh;
+    width: 1400px;
+    border: 2px solid black
+}
+
+#card{
+    border: 1px solid blue;
 }

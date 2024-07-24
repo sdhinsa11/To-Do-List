@@ -37,3 +37,5 @@ var projects = (function(){
     };
 
 })();
+
+export {projects}
