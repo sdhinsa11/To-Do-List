@@ -30,48 +30,12 @@ function main(){
     projectCreated();
 
 
-
-    let pBtns = document.querySelectorAll(".pBtn");
-    for (let button of pBtns){
-        button.addEventListener('click', ()=>{
-            const projectId = button.id;
-            const pTaskList = filterTasks(projectId);
-            renderTasks(pTaskList);
-        });
-    }
-
 }
 
-function filterTasks(projectId){
-    const tasks = tks.getTasks();
-    let pTasks = []
-
-    for(let t of tasks){
-        if (t.sec == projectId){
-            pTasks.push(t);
-        }
-    }
-
-    return pTasks;
-}
-
-function renderTasks(taskList){
-    document.getElementById("todos").innerHTML="";
-    taskList.forEach((ts) =>{
-        createTaskCard(ts.title, ts.dueDate, ts.prior);
-    });
-}
 
 
 main();
 
-
-
-
-
-// add the task to the section to section it - YES
-
-// after we add to the updateSecOptions, we now need to make sure everything is getting updated and make sure it stays updated after we add a task to the project
 
 
 
