@@ -107,23 +107,24 @@ function createProjectBtn(name){
 
 // Shows everything 
 function render(){
-    let tasks = tks.getTasks();
+    
+    
+
+    homeAction();
+    document.getElementById("defaultOpen").click();
+
     let proj = projects.getProjects();
-
-    document.getElementById("todos").innerHTML="";
-
     document.getElementById("allP").innerHTML="";
 
-    tasks.forEach((ts) =>{
-        createTaskCard(ts.title, ts.dueDate, ts.prior);
-    });
+    
 
     proj.forEach((pj) =>{
         createProjectBtn(pj.title);
     });
 
-    updateSecOptions(); // this is here to get updated every time just incase its added, so its insync 
 
+
+    updateSecOptions(); // this is here to get updated every time just incase its added, so its insync 
     //attaches the function to button so when clicked you can see everything
     attachEventtoProject();
 }
@@ -177,13 +178,32 @@ function filterTasks(projectId){
     return pTasks;
 }
 
-function renderTasks(taskList){
+function renderTasks(taskList = tks.getTasks()){
     document.getElementById("todos").innerHTML="";
     taskList.forEach((ts) =>{
         createTaskCard(ts.title, ts.dueDate, ts.prior);
     });
 }
 
+function homeAction(){
+    // main screen
+    const homeBtn = document.getElementById("defaultOpen");
+    document.getElementById("todos").innerHTML="";
+    homeBtn.addEventListener("click", () =>{
+        renderTasks();
+    });
 
+}
+
+function taskCompleted(){
+    const completeBtn = document.getElementById("completed");
+    document.getElementById("todos").innerHTML="";
+    completeBtn.addEventListener("click", () =>{
+        //logic for rendering it
+
+    });
+
+    
+}
 
 export {render, taskCreated, projectCreated, createTaskCard};

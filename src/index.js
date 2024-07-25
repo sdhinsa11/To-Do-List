@@ -39,7 +39,7 @@ main();
 
 
 
-// get functionality for the home button / date / completed - Today 
+// get functionality for the date / completed - Today 
 
 // use the storage and date stuff in the list - Today 
 
