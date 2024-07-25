@@ -64,6 +64,8 @@ function render(){
     proj.forEach((pj) =>{
         createProjectBtn(pj.title);
     });
+
+    updateSecOptions()
 }
 
 
@@ -75,6 +77,7 @@ function taskCreated(){
     const taskInfo  = document.getElementById("taskInfo");
 
     const addTaskT = document.getElementById("addTaskT");
+    updateSecOptions()
 
     showDialog.addEventListener("click", ()=>{
         dialog.showModal();
@@ -85,11 +88,13 @@ function taskCreated(){
         dialog.close();
     });
 
+    
+
     addTaskT.addEventListener("click", (e)=>{
         const t = document.getElementById("title").value;
         const d = document.getElementById("da").value;
         const pr = document.getElementById("prior").value;
-        const s = document.getElementById("seC").value;
+        const s = document.getElementById("optionsS").value;
     
         tks.addToTasks(t, d, pr, s);
         e.preventDefault();
@@ -126,6 +131,20 @@ function projectCreated(){
         dialog.close();
         projectInfo.reset();
     });
+}
+
+function updateSecOptions(){
+    const dropDown = document.getElementById("optionsS");
+    dropDown.innerHTML ='';
+
+    const projs = projects.getProjects();
+    projs.forEach(project => {
+        const option = document.createElement('option');
+        option.value = project.title;
+        option.textContent = project.title;
+        dropDown.appendChild(option);
+    }); 
+
 }
 
 

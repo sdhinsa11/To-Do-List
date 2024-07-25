@@ -25,6 +25,7 @@ function main(){
     projects.addToProj("School");
 
     render();
+    // updateSecOptions();
     taskCreated();
     projectCreated();
 
@@ -65,14 +66,21 @@ function renderTasks(taskList){
 main();
 
 
-//now i need some way to filter the projects with the tasks and we are all good
-// I will have some stationary tasks such as: home: today: completed 
 
 
-// add the task to the section to section it 
-// get functionality for the home button / date / completed 
 
-// use the storage and date stuff in the list 
+// add the task to the section to section it - YES
+
+// after we add to the updateSecOptions, we now need to make sure everything is getting updated and make sure it stays updated after we add a task to the project
+
+
+
+// get functionality for the home button / date / completed - Today 
+
+// use the storage and date stuff in the list - Today 
+
+
+
 // organize by priority 
 // add a desc 
 // edit the cards 
