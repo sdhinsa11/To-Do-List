@@ -6,24 +6,96 @@
     <title>To Do List</title>
 </head>
 <body>
-    <div>
+    <!-- <div> -->
         <header>
             <h1 class="hea">To Do List</h1>
         </header>
 
         <div class = "main">
             <nav id="nav" class="sidebar">
+
+                <button class = "addT" id = "aT">Add Tasks</button>
                 <button class = "tabs" id = "defaultOpen">Home</button>
                 <button class = "tabs" id = "today">Today</button>
                 <button class = "tabs" id = "completed">Completed</button>
+
+
+
+                <button class="addP" id="aP">Add Projects</button>
+                <div class="allProjects" id="allP">
+                </div>
+               
+
+                <!-- button for add project -->
             </nav>
 
+            <!-- button for adding task -->
             <div class = "toDos" id="todos">
             </div>
         </div>
 
+        <dialog id="dialog">
+            <form id="taskInfo">
+                <div id = "task_name">
+                    <label for="task_name">Task Name:</label>
+                    <input type="text" name="task_name" id="title">
+                </div>
+    
+                <div id="book_author">
+                    <label for="author">Date </label>
+                    <input type="datetime-local" id="da">
+                </div>
 
-    </div>
+                <div id = "pri">
+                    <label for="prior_lvl">Priority:</label>
+                    <input type="text" name="prior_lvl" id="prior">
+                </div>
+
+
+                <div id = "sec_name">
+                    <label for="sec_name">Section Name:</label>
+                    <input type="text" name="sec_name" id="seC">
+                </div>
+
+                <!-- <div id="priority">
+                    <label for="priority">Priority: </label>
+                    <input type="text" name="priorit" id="pri">
+                </div>
+
+                <div id="book_read">
+                    <label for="read">Have you read the book:</label>
+    
+                    <select name="read" id="options">
+                        <option value = "yes">Yes</option>
+                        <option value = "no">No</option>
+                    </select>
+                </div> -->
+    
+                <div id = "dButtons">
+                    <button id ='addTaskT'>Add Task</button>
+                    <button id ='close'>Close</button>
+                </div>
+                
+            </form>
+
+        </dialog>
+
+        <dialog id="projDialog">
+            <form id="projectInfo">
+                <div id = "project_name">
+                    <label for="project_name">Project Name:</label>
+                    <input type="text" name="project_name" id="pTitle">
+                </div>
+                
+                <div id = "dButtons">
+                    <button id ='addProjectP'>Add Task</button>
+                    <button id ='closeP'>Close</button>
+                </div>
+            </form>
+        </dialog>
+
+
+    <!-- </div> -->
 
 </body>
 </html>

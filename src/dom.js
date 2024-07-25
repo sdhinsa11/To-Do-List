@@ -30,20 +30,71 @@ function createTaskCard(title, date, priority){
     container.appendChild(card);
 }
 
-// show the todo's
+// function projectCreated(name){
+//     projects.addToProj(name);
+// }
+
+function createProjectBtn(name){
+    const container = document.getElementById("allP");
+
+    const pBtn = document.createElement("button");
+    pBtn.textContent = `${name}`;
+    pBtn.id = name;
+    container.appendChild(pBtn);
+}
 
 
+
+// show the todo's from the list
 function render(){
-    tks.addToTasks("coding", "lots", "Tmrw", "low", "none");
-    tks.addToTasks("packing", "less", "monday", "high", "travel");
-    tks.addToTasks("food", "less", "tuesday", "medium", "travel");
     let tasks = tks.getTasks();
+    let proj = projects.getProjects();
 
     document.getElementById("todos").innerHTML="";
+
+    document.getElementById("allP").innerHTML="";
 
     tasks.forEach((ts) =>{
         createTaskCard(ts.title, ts.dueDate, ts.prior);
     });
+
+    proj.forEach((pj) =>{
+        createProjectBtn(pj.title);
+    })
 }
 
-export default render;
+
+//adding to todo list from button
+function taskCreated(){
+    const showDialog = document.getElementById("aT")
+    const dialog = document.getElementById("dialog");
+    const closeDialog = document.getElementById("close");
+    const taskInfo  = document.getElementById("taskInfo");
+
+    const addTaskT = document.getElementById("addTaskT");
+
+    showDialog.addEventListener("click", ()=>{
+        dialog.showModal();
+    });
+
+    closeDialog.addEventListener("click", (e) =>{
+        e.preventDefault();
+        dialog.close();
+    });
+
+    addTaskT.addEventListener("click", (e)=>{
+        const t = document.getElementById("title").value;
+        const d = document.getElementById("da").value;
+        const pr = document.getElementById("prior").value;
+        const s = document.getElementById("seC").value;
+    
+        tks.addToTasks(t, d, pr, s);
+        e.preventDefault();
+        render();
+        dialog.close();
+        taskInfo.reset();
+    });
+}
+
+
+export {render, taskCreated};

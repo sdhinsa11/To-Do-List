@@ -33,9 +33,9 @@ var projects = (function(){
     return{
         addToProj: addToProj,
         deleteProj: deleteProj,
-        allProjects:allProjects,
+        getProjects:getProjects,
     };
 
 })();
 
-export {projects}
+export default projects;

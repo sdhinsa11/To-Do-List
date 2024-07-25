@@ -1,14 +1,51 @@
 import './style.css';
-import render from './dom.js'
+import {render, taskCreated} from './dom.js'
+import tks from'./task.js';
+import projects from './categories.js';
 //dom properties 
 
 function main(){
     render();
+    taskCreated();
+
+    const showDialog = document.getElementById("aP");
+    const dialog = document.getElementById("projDialog");
+    const closeDialog = document.getElementById("closeP");
+    const projectInfo = document.getElementById("projectInfo");
+
+    const addProjectP = document.getElementById("addProjectP");
+
+    showDialog.addEventListener("click", ()=>{
+        dialog.showModal();
+    });
+
+    closeDialog.addEventListener("click", (e) =>{
+        e.preventDefault();
+        dialog.close();
+    });
+
+    
+    addProjectP.addEventListener("click", (e)=>{
+        const pName = document.getElementById("pTitle").value;
+        projects.addToProj(pName);
+        console.log(projects.getProjects());
+        e.preventDefault();
+        render();
+        dialog.close();
+        projectInfo.reset();
+    });
+
 }
+
+// get the div where the things are located 
+// iteratre through the buttons like in the calculator/etch a sketch
+// if its clicked on that button then grab that id and call the function to display it 
+// use the filter logic
+// create a render that takes in the list and displayed that one 
 
 main();
 
-// have an add button to add the tasks - this should not move 
+
 // filtering logic 
 // switch pages  
 
