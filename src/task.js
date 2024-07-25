@@ -1,9 +1,9 @@
 import './style.css';
 
 class Task{
-    constructor(title, desc, dueDate, priority, section){
+    constructor(title, dueDate, priority, section){
         this.title = title;
-        this.desc = desc;
+        // this.desc = desc;
         this.dueDate = dueDate;
         this.prior = priority;
         this.sec = section;
@@ -30,8 +30,8 @@ var tks = (function(){
     //creating array for projects
     let allTasks = [];
 
-    function addToTasks(t, de, dd, p, s){
-        allTasks.push(new Task(t, de, dd, p, s));
+    function addToTasks(t, dd, p, s){
+        allTasks.push(new Task(t, dd, p, s));
     }
 
     function deleteTasks(p){

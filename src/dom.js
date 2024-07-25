@@ -40,6 +40,7 @@ function createProjectBtn(name){
     const pBtn = document.createElement("button");
     pBtn.textContent = `${name}`;
     pBtn.id = name;
+    pBtn.className = "pBtn";
     container.appendChild(pBtn);
 }
 
@@ -48,7 +49,9 @@ function createProjectBtn(name){
 // show the todo's from the list
 function render(){
     let tasks = tks.getTasks();
+    console.log(tasks);
     let proj = projects.getProjects();
+    console.log(proj);
 
     document.getElementById("todos").innerHTML="";
 
@@ -60,7 +63,7 @@ function render(){
 
     proj.forEach((pj) =>{
         createProjectBtn(pj.title);
-    })
+    });
 }
 
 
@@ -96,5 +99,34 @@ function taskCreated(){
     });
 }
 
+function projectCreated(){
+    const showDialog = document.getElementById("aP");
+    const dialog = document.getElementById("projDialog");
+    const closeDialog = document.getElementById("closeP");
+    const projectInfo = document.getElementById("projectInfo");
 
-export {render, taskCreated};
+    const addProjectP = document.getElementById("addProjectP");
+
+    showDialog.addEventListener("click", ()=>{
+        dialog.showModal();
+    });
+
+    closeDialog.addEventListener("click", (e) =>{
+        e.preventDefault();
+        dialog.close();
+    });
+
+    
+    addProjectP.addEventListener("click", (e)=>{
+        const pName = document.getElementById("pTitle").value;
+        projects.addToProj(pName);
+        // console.log(projects.getProjects());
+        e.preventDefault();
+        render();
+        dialog.close();
+        projectInfo.reset();
+    });
+}
+
+
+export {render, taskCreated, projectCreated, createTaskCard};

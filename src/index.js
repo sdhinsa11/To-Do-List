@@ -1,60 +1,79 @@
 import './style.css';
-import {render, taskCreated} from './dom.js'
+import {render, taskCreated, projectCreated, createTaskCard} from './dom.js'
 import tks from'./task.js';
 import projects from './categories.js';
 //dom properties 
 
 function main(){
+
+    //testing purposes
+    tks.addToTasks("Coding", "Jan", 3, "Work");
+    tks.addToTasks("Project", "Feb", 2, "Work");
+    tks.addToTasks("Finances", "May", 1, "Work");
+
+    tks.addToTasks("Nails", "July", 2, "Personal");
+    tks.addToTasks("Laser", "July", 2, "Personal");
+    tks.addToTasks("Dr", "August", 2, "Personal");
+
+    tks.addToTasks("Social", "October", 2, "School");
+    tks.addToTasks("Math", "September", 1, "School");
+    tks.addToTasks("English", "Oct", 1, "School");
+    tks.addToTasks("Science", "September", 1, "School");
+
+    projects.addToProj("Work");
+    projects.addToProj("Personal");
+    projects.addToProj("School");
+
     render();
     taskCreated();
+    projectCreated();
 
-    const showDialog = document.getElementById("aP");
-    const dialog = document.getElementById("projDialog");
-    const closeDialog = document.getElementById("closeP");
-    const projectInfo = document.getElementById("projectInfo");
 
-    const addProjectP = document.getElementById("addProjectP");
 
-    showDialog.addEventListener("click", ()=>{
-        dialog.showModal();
-    });
-
-    closeDialog.addEventListener("click", (e) =>{
-        e.preventDefault();
-        dialog.close();
-    });
-
-    
-    addProjectP.addEventListener("click", (e)=>{
-        const pName = document.getElementById("pTitle").value;
-        projects.addToProj(pName);
-        console.log(projects.getProjects());
-        e.preventDefault();
-        render();
-        dialog.close();
-        projectInfo.reset();
-    });
+    let pBtns = document.querySelectorAll(".pBtn");
+    for (let button of pBtns){
+        button.addEventListener('click', ()=>{
+            const projectId = button.id;
+            const pTaskList = filterTasks(projectId);
+            renderTasks(pTaskList);
+        });
+    }
 
 }
 
-// get the div where the things are located 
-// iteratre through the buttons like in the calculator/etch a sketch
-// if its clicked on that button then grab that id and call the function to display it 
-// use the filter logic
-// create a render that takes in the list and displayed that one 
+function filterTasks(projectId){
+    const tasks = tks.getTasks();
+    let pTasks = []
+
+    for(let t of tasks){
+        if (t.sec == projectId){
+            pTasks.push(t);
+        }
+    }
+
+    return pTasks;
+}
+
+function renderTasks(taskList){
+    document.getElementById("todos").innerHTML="";
+    taskList.forEach((ts) =>{
+        createTaskCard(ts.title, ts.dueDate, ts.prior);
+    });
+}
+
 
 main();
 
 
-// filtering logic 
-// switch pages  
-
-
-
-
-// now we need to filter based on the page and so we grab the tasks and we add them 
-// this is where the dom comes in 
-
 //now i need some way to filter the projects with the tasks and we are all good
 // I will have some stationary tasks such as: home: today: completed 
+
+
+// add the task to the section to section it 
+// get functionality for the home button / date / completed 
+
+// use the storage and date stuff in the list 
+// organize by priority 
+// add a desc 
+// edit the cards 
 
