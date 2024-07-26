@@ -13,16 +13,27 @@ class P{
 
 var projects = (function(){
 
+    let allProjects = JSON.parse(localStorage.getItem('projects')) || [];
+
+    // Ensure all projects are instances of P
+    allProjects = allProjects.map(proj => new P(proj.title));
+
+    function saveProjects() {
+        localStorage.setItem('projects', JSON.stringify(allProjects));
+    }
+
     //creating array for projects
-    let allProjects = [];
+    // let allProjects = [];
 
     function addToProj(name){
         allProjects.push(new P(name));
+        saveProjects();
     }
 
     function deleteProj(p){
         index = allProjects.indexOf(p);
         allProjects.splice(index, 1);
+        saveProjects();
     }
 
     function getProjects(){

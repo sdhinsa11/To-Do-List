@@ -26,29 +26,31 @@ class Task{
 
 
 var tks = (function(){
-    let allTasks =[];
-    let complTasks = [];
+    // let allTasks =[];
+    // let complTasks = [];
 
-    //creating array for projects
-    // function loadTasks(){
-    //     let allTasks = [] || JSON.parse(localStorage.getItem('tasks'));
-    //     return allTasks.map(task => new Task(task.title, task.dueDate, task.project, task.status));
-    // }
+    let allTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let complTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
 
-    // function saveTasks(tasks){
-    //     localStorage.setItem('tasks', JSON.stringify(tasks));
-    // }
+    // Ensure all tasks are instances of Task
+    allTasks = allTasks.map(task => new Task(task.title, task.dueDate, task.prior, task.sec));
+    complTasks = complTasks.map(task => new Task(task.title, task.dueDate, task.prior, task.sec));
 
+    function saveTasks() {
+        localStorage.setItem('tasks', JSON.stringify(allTasks));
+        localStorage.setItem('completedTasks', JSON.stringify(complTasks));
+    }
 
     function addToTasks(t, dd, p, s){
         // let allTasks = loadTasks()
         allTasks.push(new Task(t, dd, p, s));
-        // saveTasks(allTasks);
+        saveTasks();
     }
 
     function deleteTasks(p){
         const index = allTasks.indexOf(p);
         allTasks.splice(index, 1);
+        saveTasks();
     }
 
     function getTasks(){
@@ -59,6 +61,7 @@ var tks = (function(){
         if (t.compl){
             complTasks.push(t);
             deleteTasks(t);
+            saveTasks();
         }
 
     }
