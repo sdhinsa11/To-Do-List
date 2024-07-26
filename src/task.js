@@ -26,27 +26,54 @@ class Task{
 
 
 var tks = (function(){
+    let allTasks =[];
+    let complTasks = [];
 
     //creating array for projects
-    let allTasks = [];
+    // function loadTasks(){
+    //     let allTasks = [] || JSON.parse(localStorage.getItem('tasks'));
+    //     return allTasks.map(task => new Task(task.title, task.dueDate, task.project, task.status));
+    // }
+
+    // function saveTasks(tasks){
+    //     localStorage.setItem('tasks', JSON.stringify(tasks));
+    // }
+
 
     function addToTasks(t, dd, p, s){
+        // let allTasks = loadTasks()
         allTasks.push(new Task(t, dd, p, s));
+        // saveTasks(allTasks);
     }
 
     function deleteTasks(p){
-        index = allProjects.indexOf(p);
+        const index = allTasks.indexOf(p);
         allTasks.splice(index, 1);
     }
 
     function getTasks(){
-        return allTasks
+        return allTasks;
+    }
+
+    function completed(t){
+        if (t.compl){
+            complTasks.push(t);
+            deleteTasks(t);
+        }
+
+    }
+
+    function getCompleted(){
+        return complTasks;
+
     }
 
     return{
         addToTasks: addToTasks,
         deleteTasks: deleteTasks,
         getTasks: getTasks,
+        completed: completed,
+        getCompleted: getCompleted,
     };
 
 })();

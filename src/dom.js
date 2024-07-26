@@ -50,6 +50,7 @@ function projectCreated(){
 
     closeDialog.addEventListener("click", (e) =>{
         e.preventDefault();
+        projectInfo.reset();
         dialog.close();
     });
 
@@ -68,30 +69,80 @@ function projectCreated(){
 
 
 // Create the Tasks from List to be used in Render 
-function createTaskCard(title, date, priority){
+function createTaskCard(ts){
     const container = document.getElementById("todos");
 
-    const card = document.createElement("div");
+    const card = document.createElement("button");
     card.id = "card";
+    card.className = "collapsible";
+    card.innerHTML = `${ts.title}<br>${ts.dueDate}`;
 
-    const n = document.createElement("h5");
-    n.textContent = `${title}`;
+    // const n = document.createElement("h5");
+    // n.textContent = `${title}`;
+    // const d = document.createElement("p");
+    // d.textContent = `${date}`;
 
-    const d = document.createElement("p");
-    d.textContent = `${date}`;
+    const expandedCard = document.createElement("div");
+    expandedCard.className = "content";
 
     const pri = document.createElement("p");
-    pri.textContent = `${priority}`;
+    pri.textContent = `${ts.prior}`;
 
-    const plusButton = document.createElement("button");
-    plusButton.textContent = "+"
+    const s = document.createElement("p");
+    pri.textContent = `${ts.sec}`;
 
-    card.appendChild(n);
-    card.appendChild(d);
-    card.appendChild(pri);
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete"
+    deleteButton.addEventListener("click", function() {
+        tks.deleteTasks(ts);
+        container.removeChild(card);
+        container.removeChild(expandedCard);
+        render();
+
+    });
+
+    const completeButton = document.createElement("button");
+    completeButton.textContent = "Complete";
+    completeButton.addEventListener("click", function() {
+        ts.setComplete();
+        tks.completed(ts);
+        card.style.textDecoration = "line-through";
+        expandedCard.style.textDecoration = "line-through";
+
+    });
+
+
+
+
+    expandedCard.appendChild(s);
+    expandedCard.appendChild(pri);
+    expandedCard.appendChild(deleteButton);
+    expandedCard.appendChild(completeButton);
 
     container.appendChild(card);
+    container.append(expandedCard);
 }
+
+
+function showCard(){
+    var coll = document.getElementsByClassName("collapsible");
+    for (let i =0; i<coll.length; i++){
+        coll[i].addEventListener("click", function(){
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block"){
+                content.style.display = "none";
+            }
+            else{
+            content.style.display = "block";
+            }
+        });  
+    }
+}
+
+
+
+
 
 // Creating the project button to be displayed by in the UI (by Render )
 function createProjectBtn(name){
@@ -107,30 +158,23 @@ function createProjectBtn(name){
 
 // Shows everything 
 function render(){
-    
-    
-
     homeAction();
-    document.getElementById("defaultOpen").click();
 
     let proj = projects.getProjects();
     document.getElementById("allP").innerHTML="";
-
-    
 
     proj.forEach((pj) =>{
         createProjectBtn(pj.title);
     });
 
-
-
+    // showCard();
     updateSecOptions(); // this is here to get updated every time just incase its added, so its insync 
     //attaches the function to button so when clicked you can see everything
     attachEventtoProject();
+    taskCompleted();
+    document.getElementById("defaultOpen").click(); // needs to be at bottom
+
 }
-
-
-
 
 
 //When a project is added its reflected in the drop down menu when adding a task, 
@@ -148,8 +192,6 @@ function updateSecOptions(){
     }); 
 
 }
-
-
 
 
 // This is for when you click on a page you see the section that the divs belong too
@@ -174,15 +216,15 @@ function filterTasks(projectId){
             pTasks.push(t);
         }
     }
-
     return pTasks;
 }
 
 function renderTasks(taskList = tks.getTasks()){
     document.getElementById("todos").innerHTML="";
     taskList.forEach((ts) =>{
-        createTaskCard(ts.title, ts.dueDate, ts.prior);
+        createTaskCard(ts);
     });
+    showCard();
 }
 
 function homeAction(){
@@ -196,14 +238,16 @@ function homeAction(){
 }
 
 function taskCompleted(){
+    
     const completeBtn = document.getElementById("completed");
     document.getElementById("todos").innerHTML="";
     completeBtn.addEventListener("click", () =>{
-        //logic for rendering it
-
-    });
-
-    
+        const tasks = tks.getCompleted();
+        renderTasks(tasks);
+    }); 
 }
 
-export {render, taskCreated, projectCreated, createTaskCard};
+
+
+
+export {render, taskCreated, projectCreated, taskCompleted, showCard};
